@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🎓 Đếm Ngược Ngày Thi THPT 2026 🎓</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      box-sizing: border-box;
+      overflow: hidden; /* khóa không scroll ngang */
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      width: 100%;
+      max-width: 800px;
+      animation: fadeIn 1s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .countdown div {
+      position: relative;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(6px);
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+      z-index: 1;
+    }
+
+    .countdown div::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      padding: 2px;
+      background: linear-gradient(135deg, #7F00FF, #E100FF);
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+              mask-composite: exclude;
+      z-index: -1;
+    }
+
+    .countdown div:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .countdown span {
+      display: block;
+      font-size: 3em;
+      font-weight: bold;
+      color: #ffe082;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    }
+
+    .countdown p {
+      margin: 5px 0 0;
+      font-size: 1.1em;
+      color: #f1f1f1;
+    }
+
+    .quote-section {
+      margin-top: 30px;
+      font-style: italic;
+      font-size: 1.2em;
+      line-height: 1.6;
+      color: #b3e5fc;
+      animation: slideInUp 0.8s ease-out;
+    }
+
+    .quote-section footer {
+      margin-top: 10px;
+      font-size: 0.9em;
+      color: #c5cae9;
+    }
+
+    #copyright {
+      margin-top: 20px;
+      font-size: 0.8em;
+      opacity: 0.7;
+    }
+
+    @keyframes slideInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      .countdown {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+      .countdown span {
+        font-size: 2.5em;
+      }
+      .countdown p {
+        font-size: 1em;
+      }
+      .quote-section {
+        font-size: 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎓 Đếm Ngược Ngày Thi Tốt Nghiệp THPT 2026 (dự đoán) 🎓</h1>
+    <div class="countdown">
+      <div>
+        <span id="days">00</span>
+        <p>Ngày</p>
+      </div>
+      <div>
+        <span id="hours">00</span>
+        <p>Giờ</p>
+      </div>
+      <div>
+        <span id="minutes">00</span>
+        <p>Phút</p>
+      </div>
+      <div>
+        <span id="seconds">00</span>
+        <p>Giây</p>
+      </div>
+    </div>
+    <div class="quote-section">
+      <blockquote id="quote-text"></blockquote>
+      <footer id="quote-author"></footer>
+    </div>
+  </div>
+
+  <div id="copyright">©copyright by Nguyễn Quang Minh</div>
+
+  <script>
+    const targetDate = new Date("June 26, 2026 00:00:00").getTime();
+    const quotes = [
+      { text: "Con đường ngàn dặm bắt đầu từ một bước chân.", author: "Lão Tử" },
+      { text: "Hãy sống như thể bạn sẽ chết vào ngày mai. Hãy học như thể bạn sẽ sống mãi mãi.", author: "Mahatma Gandhi" },
+      { text: "Thành công không phải là chìa khóa của hạnh phúc. Hạnh phúc là chìa khóa của thành công.", author: "Albert Schweitzer" },
+      { text: "Kỷ luật là cầu nối giữa mục tiêu và thành tựu.", author: "Jim Rohn" },
+      { text: "Nếu bạn không thể bay, hãy chạy. Nếu không chạy được, hãy đi bộ.", author: "Martin Luther King Jr." },
+      { text: "Tương lai thuộc về những người tin vào vẻ đẹp của ước mơ.", author: "Eleanor Roosevelt" },
+      { text: "Cuộc sống chỉ có hai ngày quan trọng: ngày bạn sinh ra và ngày bạn biết vì sao.", author: "Mark Twain" },
+      { text: "Sự chuẩn bị tốt nhất cho ngày mai là làm tốt ngày hôm nay.", author: "H. Jackson Brown Jr." },
+      { text: "Học vấn là hành trang quý giá nhất của tuổi trẻ.", author: "Ngạn ngữ Việt" },
+      { text: "Người thành công là người sẵn sàng học hỏi suốt đời.", author: "Khuyết danh" },
+      { text: "Không gì là không thể khi bạn kiên trì và sáng tạo.", author: "Khuyết danh" },
+    ];
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const diff = targetDate - now;
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+      document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+      document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+      document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+    }
+
+    function displayQuote() {
+      const q = quotes[Math.floor(Math.random() * quotes.length)];
+      document.getElementById("quote-text").innerText = q.text;
+      document.getElementById("quote-author").innerText = "- " + q.author;
+    }
+
+    displayQuote();
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
